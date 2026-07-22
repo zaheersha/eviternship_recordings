@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVITERNSHIP | Full Stack Recording Portal</title>
+<style>
+  :root{
+    --bg:#0B0B0B;
+    --card:#171717;
+    --card-2:#1D1D1D;
+    --orange:#FF7A00;
+    --orange-2:#FF9640;
+    --text:#FFFFFF;
+    --text-dim:#A6A6A6;
+    --border:rgba(255,255,255,0.08);
+    --radius:18px;
+    --shadow:0 20px 45px rgba(0,0,0,0.55);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(255,122,0,0.10), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(255,122,0,0.06), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  ::selection{background:var(--orange); color:#000;}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#2b2b2b; border-radius:10px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--orange);}
+
+  /* ===================== LOADER ===================== */
+  #loader{
+    position:fixed; inset:0; background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    z-index:9999; flex-direction:column; gap:18px;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #loader.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  .loader-logo{
+    font-size:1.8rem; font-weight:800; letter-spacing:1px;
+  }
+  .loader-logo .it{color:var(--orange);}
+  .spin-ring{
+    width:38px; height:38px; border-radius:50%;
+    border:3px solid rgba(255,122,0,0.15);
+    border-top-color:var(--orange);
+    animation:spin 0.9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ===================== SHARED ===================== */
+  .fade-up{
+    animation:fadeUp .7s ease both;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(24px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .glass{
+    background:rgba(23,23,23,0.65);
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+  }
+
+  .btn-primary{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, var(--orange), var(--orange-2));
+    color:#0B0B0B; font-weight:700;
+    border:none; border-radius:12px;
+    padding:14px 22px; font-size:0.95rem;
+    transition:transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 8px 24px rgba(255,122,0,0.25);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,122,0,0.4);}
+  .btn-primary:active{transform:translateY(0);}
+
+  .ripple{
+    position:absolute; border-radius:50%;
+    background:rgba(255,255,255,0.5);
+    transform:scale(0);
+    animation:ripple .6s linear;
+    pointer-events:none;
+  }
+  @keyframes ripple{ to{ transform:scale(4); opacity:0; } }
+
+  /* ===================== LOGIN ===================== */
+  #login-screen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .login-card{
+    width:100%; max-width:420px;
+    border-radius:24px;
+    padding:44px 36px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .login-card::before{
+    content:"";
+    position:absolute; inset:-1px;
+    border-radius:24px;
+    padding:1px;
+    background:linear-gradient(135deg, rgba(255,122,0,0.5), transparent 60%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+  }
+  .login-logo{
+    font-size:1.9rem; font-weight:800; letter-spacing:1px; margin-bottom:22px;
+  }
+  .login-logo .it{color:var(--orange);}
+  .login-card h1{
+    font-size:1.4rem; font-weight:700; margin-bottom:10px; line-height:1.35;
+  }
+  .login-card p{
+    color:var(--text-dim); font-size:0.92rem; margin-bottom:28px;
+  }
+  .code-input{
+    width:100%; padding:15px 16px; border-radius:12px;
+    background:#0F0F0F; border:1px solid var(--border);
+    color:var(--text); font-size:1rem; letter-spacing:2px;
+    text-align:center; text-transform:uppercase;
+    margin-bottom:16px; transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .code-input:focus{outline:none; border-color:var(--orange); box-shadow:0 0 0 3px rgba(255,122,0,0.15);}
+  .login-card .btn-primary{width:100%;}
+  .error-msg{
+    color:#FF5C5C; font-size:0.88rem; margin-top:14px;
+    min-height:18px; opacity:0; transform:translateY(-4px);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .error-msg.show{opacity:1; transform:translateY(0);}
+  .error-msg.shake{animation:shake .4s ease;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-4px);}
+    80%{transform:translateX(4px);}
+  }
+
+  /* ===================== DASHBOARD ===================== */
+  #dashboard{display:none;}
+  #dashboard.active{display:block;}
+
+  header.topnav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(11,11,11,0.75);
+    -webkit-backdrop-filter:blur(14px);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-left{display:flex; align-items:center; gap:12px;}
+  .nav-logo{font-size:1.25rem; font-weight:800; letter-spacing:0.5px;}
+  .nav-logo .it{color:var(--orange);}
+  .nav-tag{
+    font-size:0.72rem; color:var(--text-dim);
+    border-left:1px solid var(--border); padding-left:12px;
+    display:none;
+  }
+  @media(min-width:520px){.nav-tag{display:block;}}
+  .logout-btn{
+    padding:9px 18px; border-radius:10px;
+    background:transparent; border:1px solid var(--border);
+    color:var(--text); font-size:0.85rem; font-weight:600;
+    transition:all .2s ease;
+  }
+  .logout-btn:hover{border-color:var(--orange); color:var(--orange); background:rgba(255,122,0,0.08);}
+
+  .hero{
+    padding:52px 28px 30px;
+    max-width:1200px; margin:0 auto;
+  }
+  .hero h1{
+    font-size:clamp(1.6rem, 3vw, 2.3rem); font-weight:800; margin-bottom:8px;
+  }
+  .hero p{color:var(--text-dim); font-size:1rem; max-width:520px;}
+
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    gap:14px; max-width:1200px; margin:0 auto; padding:0 28px 10px;
+  }
+  @media(min-width:700px){.stats-grid{grid-template-columns:repeat(4, 1fr);}}
+  .stat-card{
+    border-radius:16px; padding:20px; text-align:left;
+    transition:transform .25s ease;
+  }
+  .stat-card:hover{transform:translateY(-4px);}
+  .stat-value{font-size:1.7rem; font-weight:800; color:var(--orange);}
+  .stat-label{font-size:0.8rem; color:var(--text-dim); margin-top:4px;}
+
+  .progress-wrap{
+    max-width:1200px; margin:24px auto 0; padding:0 28px;
+  }
+  .progress-card{border-radius:16px; padding:20px 22px;}
+  .progress-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:0.9rem;}
+  .progress-top span:last-child{color:var(--orange); font-weight:700;}
+  .progress-track{
+    width:100%; height:10px; border-radius:20px; background:#0F0F0F; overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .progress-fill{
+    height:100%; border-radius:20px;
+    background:linear-gradient(90deg, var(--orange), var(--orange-2));
+    width:0%; transition:width 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  .continue-wrap{max-width:1200px; margin:26px auto 0; padding:0 28px; display:none;}
+  .continue-wrap.show{display:block;}
+  .section-title{font-size:1rem; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .continue-card{
+    border-radius:16px; padding:18px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .continue-info b{font-size:0.95rem;}
+  .continue-info div{color:var(--text-dim); font-size:0.82rem; margin-top:4px;}
+
+  .controls-wrap{
+    max-width:1200px; margin:30px auto 0; padding:0 28px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .search-box{
+    display:flex; align-items:center; gap:10px;
+    border-radius:14px; padding:14px 18px;
+  }
+  .search-box input{
+    flex:1; background:transparent; border:none; color:var(--text);
+    font-size:0.95rem;
+  }
+  .search-box input:focus{outline:none;}
+  .search-box svg{flex-shrink:0; opacity:0.6;}
+
+  .filter-row{
+    display:flex; gap:10px; overflow-x:auto; padding-bottom:6px;
+    scrollbar-width:thin;
+  }
+  .filter-chip{
+    flex-shrink:0; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--border); background:var(--card);
+    color:var(--text-dim); font-size:0.82rem; font-weight:600;
+    transition:all .2s ease; white-space:nowrap;
+  }
+  .filter-chip:hover{color:var(--text); border-color:rgba(255,122,0,0.4);}
+  .filter-chip.active{
+    background:var(--orange); border-color:var(--orange); color:#0B0B0B;
+  }
+
+  .cards-section{max-width:1200px; margin:22px auto 60px; padding:0 28px;}
+  .cards-grid{
+    display:grid; grid-template-columns:1fr;
+    gap:20px;
+  }
+  @media(min-width:640px){.cards-grid{grid-template-columns:repeat(2, 1fr);}}
+  @media(min-width:1024px){.cards-grid{grid-template-columns:repeat(4, 1fr);}}
+
+  .rec-card{
+    border-radius:var(--radius);
+    padding:20px; position:relative;
+    display:flex; flex-direction:column; gap:10px;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .rec-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+    border-color:rgba(255,122,0,0.35);
+  }
+  .rec-card-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .day-badge{
+    background:rgba(255,122,0,0.14); color:var(--orange);
+    font-size:0.72rem; font-weight:700; padding:5px 10px; border-radius:8px;
+    letter-spacing:0.5px;
+  }
+  .fav-btn{
+    background:none; border:none; font-size:1.15rem; color:var(--text-dim);
+    transition:transform .2s ease, color .2s ease; line-height:1;
+  }
+  .fav-btn.active{color:var(--orange); transform:scale(1.15);}
+  .fav-btn:hover{transform:scale(1.2);}
+
+  .rec-title{font-size:1.02rem; font-weight:700; line-height:1.35;}
+  .rec-desc{font-size:0.83rem; color:var(--text-dim); line-height:1.5; flex:1;}
+  .rec-meta{
+    display:flex; flex-wrap:wrap; gap:8px; font-size:0.74rem; color:var(--text-dim);
+  }
+  .rec-meta span{
+    background:#0F0F0F; border:1px solid var(--border);
+    padding:4px 9px; border-radius:7px;
+  }
+  .rec-meta span.module-tag{color:var(--orange); border-color:rgba(255,122,0,0.3);}
+
+  .watch-btn{
+    margin-top:6px; width:100%; text-align:center;
+    padding:11px; border-radius:10px; font-size:0.85rem; font-weight:700;
+  }
+
+  .empty-state{
+    text-align:center; padding:60px 20px; color:var(--text-dim);
+    grid-column:1/-1;
+  }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:36px 28px; text-align:center; color:var(--text-dim);
+    font-size:0.85rem;
+  }
+  footer .f-logo{font-size:1.15rem; font-weight:800; color:var(--text); margin-bottom:6px;}
+  footer .f-logo .it{color:var(--orange);}
+  footer p{margin:3px 0;}
+
+  @media(max-width:520px){
+    .hero{padding:36px 18px 20px;}
+    .stats-grid, .controls-wrap, .cards-section, .progress-wrap, .continue-wrap{padding-left:18px; padding-right:18px;}
+    header.topnav{padding:14px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">EV<span class="it">IT</span>ERNSHIP</div>
+  <div class="spin-ring"></div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-card glass fade-up">
+    <div class="login-logo">EV<span class="it">IT</span>ERNSHIP</div>
+    <h1>Full Stack Web Development<br>Recording Portal</h1>
+    <p>Enter your Access Code to continue.</p>
+    <input type="text" id="access-code" class="code-input" placeholder="ACCESS CODE" maxlength="20" autocomplete="off">
+    <button class="btn-primary" id="access-btn">Access Portal</button>
+    <div class="error-msg" id="error-msg">❌ Invalid Access Code</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header class="topnav">
+    <div class="nav-left">
+      <div class="nav-logo">EV<span class="it">IT</span>ERNSHIP</div>
+      <div class="nav-tag">Recording Portal</div>
+    </div>
+    <button class="logout-btn" id="logout-btn">Logout</button>
+  </header>
+
+  <section class="hero fade-up">
+    <h1>Welcome Back 👋</h1>
+    <p>Watch every class recording anytime. Continue your Full Stack learning journey.</p>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card glass fade-up">
+      <div class="stat-value" id="stat-days">0</div>
+      <div class="stat-label">Total Days</div>
+    </div>
+    <div class="stat-card glass fade-up">
+      <div class="stat-value" id="stat-videos">0</div>
+      <div class="stat-label">Total Videos</div>
+    </div>
+    <div class="stat-card glass fade-up">
+      <div class="stat-value" id="stat-modules">0</div>
+      <div class="stat-label">Modules Covered</div>
+    </div>
+    <div class="stat-card glass fade-up">
+      <div class="stat-value" id="stat-latest" style="font-size:1.05rem;">-</div>
+      <div class="stat-label">Latest Upload</div>
+    </div>
+  </section>
+
+  <div class="progress-wrap">
+    <div class="progress-card glass">
+      <div class="progress-top">
+        <span>Progress</span>
+        <span id="progress-text">0 / 0 Recordings</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="continue-wrap" id="continue-wrap">
+    <div class="section-title">▶ Continue Watching</div>
+    <div class="continue-card glass" id="continue-card"></div>
+  </div>
+
+  <div class="controls-wrap">
+    <div class="search-box glass">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="search-input" placeholder="Search by day, title, description or module...">
+    </div>
+    <div class="filter-row" id="filter-row"></div>
+  </div>
+
+  <section class="cards-section">
+    <div class="cards-grid" id="cards-grid"></div>
+  </section>
+
+  <footer>
+    <div class="f-logo">EV<span class="it">IT</span>ERNSHIP</div>
+    <p>Full Stack Web Development Recording Portal</p>
+    <p>© 2026 EVITERNSHIP</p>
+    <p>Keep Learning. Keep Building.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const ACCESS_CODE = "EVITFS2026";
+  const LS_LOGIN = "eviternship_logged_in";
+  const LS_FAVS = "eviternship_favorites";
+  const LS_WATCHED = "eviternship_watched";
+  const LS_CONTINUE = "eviternship_continue";
+
+  const loader = document.getElementById('loader');
+  const loginScreen = document.getElementById('login-screen');
+  const dashboard = document.getElementById('dashboard');
+
+  let recordings = [];
+  let activeFilter = "All";
+
+  // ---------- FALLBACK DATA ----------
+  // Used only if recordings.json cannot be fetched (e.g. opening this file
+  // directly from disk without a local server). When hosted normally
+  // (Vercel, Netlify, GitHub Pages, or a local server), recordings.json is
+  // used instead, so new entries there are picked up automatically.
+  const FALLBACK_RECORDINGS = [{"day": 1, "title": "HTML & CSS Recap", "description": "Refresher on core HTML tags and CSS fundamentals before diving into advanced layout techniques.", "module": "HTML", "duration": "2h 05m", "date": "01 Jul 2026", "link": "https://drive.google.com/file/d/1HE5KloF2o_LAHRlwrHxpFsBmc9ehCP_M/view?usp=sharing"}, {"day": 2, "title": "CSS Grid Layout & Media Queries", "description": "Building responsive layouts with CSS Grid and adapting designs across screen sizes with media queries.", "module": "CSS", "duration": "1h 55m", "date": "02 Jul 2026", "link": "https://drive.google.com/file/d/1ScUfae9FeT4-8m_VK4yzT78GdvT9resv/view?usp=sharing"}, {"day": 3, "title": "CSS Animation & Transform", "description": "Bringing interfaces to life with CSS transforms, keyframe animations and transitions.", "module": "CSS", "duration": "1h 48m", "date": "03 Jul 2026", "link": "https://drive.google.com/file/d/10mnBorzQY2YnKnshWthM16ZVfXY7F4T9/view?usp=sharing"}, {"day": 4, "title": "JS Class 1 - Variables, Data Types & Tricky Console Programs", "description": "Introduction to JavaScript variables, core data types, and console-based logic puzzles.", "module": "JavaScript", "duration": "2h 10m", "date": "04 Jul 2026", "link": "https://drive.google.com/file/d/11IZLwuefUEpUmymcCd9gp1-6VL4eryU7/view?usp=sharing"}, {"day": 5, "title": "JS Class 2 - Data Types and Operators & Its Types", "description": "Deep dive into JavaScript operators, type coercion and operator precedence.", "module": "JavaScript", "duration": "2h 00m", "date": "05 Jul 2026", "link": "https://drive.google.com/file/d/1F2aooSq7BsP1LFPTcCZkWcTm-koAKgUB/view?usp=sharing"}, {"day": 6, "title": "JS Class 3 - Programming Logic and Conditional & Nested Statements", "description": "Building decision-making logic using if-else chains and nested conditionals.", "module": "JavaScript", "duration": "2h 05m", "date": "06 Jul 2026", "link": "https://drive.google.com/file/d/1VJ9wqFwqhM7gz-z6gl35bwpUumCMVhbq/view?usp=sharing"}, {"day": 7, "title": "JS Class 4 - Data Retrieval and Calculator Interface", "description": "Hands-on project building a functional calculator interface using JavaScript logic.", "module": "JavaScript", "duration": "2h 15m", "date": "07 Jul 2026", "link": "https://drive.google.com/file/d/1T8TSw6QyH-cB3nDxPP4I1BCaISbz_6IO/view?usp=sharing"}, {"day": 8, "title": "JS Class 5 - Programming Concepts: Loops", "description": "Mastering for, while and do-while loops for repetitive logic and iteration.", "module": "JavaScript", "duration": "1h 50m", "date": "08 Jul 2026", "link": "https://drive.google.com/file/d/1UCNAPVM9GSnJBEZEX9DD5xOpyFjmDCxs/view?usp=sharing"}, {"day": 9, "title": "JS Class 6 - Functions and JavaScript Arrays", "description": "Understanding function declarations, expressions, and working with arrays.", "module": "JavaScript", "duration": "2h 00m", "date": "09 Jul 2026", "link": "https://drive.google.com/file/d/1KfuwbPLmFPfYDSorvapL5-A5MzDKY4Vr/view?usp=sharing"}, {"day": 10, "title": "JS Class 7 - Array Manipulation Methods: TODO List", "description": "Using push, pop, map, filter and more to build a working TODO list application.", "module": "JavaScript", "duration": "2h 20m", "date": "10 Jul 2026", "link": "https://drive.google.com/file/d/1aFlFXhTRMHG20UYeeRZSOH5pTdKZQqdN/view?usp=sharing"}, {"day": 11, "title": "JS Class 8 - JavaScript String Manipulation Methods", "description": "Exploring string methods for searching, slicing, and transforming text data.", "module": "JavaScript", "duration": "1h 45m", "date": "11 Jul 2026", "link": "https://drive.google.com/file/d/1yjZOOd-x66RoBwwbdFlA1fapGL9oX_zR/view?usp=sharing"}, {"day": 12, "title": "JS Class 9 - String Transformation, Indexing, Validation & Extraction Logic", "description": "Advanced string handling including validation patterns and data extraction logic.", "module": "JavaScript", "duration": "2h 05m", "date": "12 Jul 2026", "link": "https://drive.google.com/file/d/1WXPwn5sHu0-3uWSZqQYnKoUadklMczSn/view?usp=sharing"}, {"day": 13, "title": "JS Class 10 - JavaScript Document Object Model Manipulation", "description": "Introduction to the DOM tree and manipulating page elements with JavaScript.", "module": "JavaScript", "duration": "2h 10m", "date": "13 Jul 2026", "link": "https://drive.google.com/file/d/1GdPh6kXQtHllNysIj37IBVkIoMu-wjpS/view?usp=sharing"}, {"day": 14, "title": "JS Class 11 - JavaScript Event Handlers 1", "description": "Handling clicks, form submissions and basic user interaction events.", "module": "JavaScript", "duration": "1h 55m", "date": "14 Jul 2026", "link": "https://drive.google.com/file/d/1oMuht1H3nzi3Ne2k4_S-BNEaSiVk5i6X/view?usp=sharing"}, {"day": 15, "title": "JS Class 12 - JavaScript Event Handlers 2", "description": "Continuing event handling with keyboard, mouse and form events.", "module": "JavaScript", "duration": "1h 50m", "date": "15 Jul 2026", "link": "https://drive.google.com/file/d/1TtbUkkqA4FlDZMLqzptYFBJUPxynr1a1/view?usp=sharing"}, {"day": 16, "title": "JS Class 13 - JavaScript Game Development", "description": "Applying core JavaScript concepts to build a simple interactive browser game.", "module": "JavaScript", "duration": "2h 25m", "date": "16 Jul 2026", "link": "https://drive.google.com/file/d/1Y69Dk3OXfwgR4TKOdIuqKB9Z_pjwXSi5/view?usp=sharing"}, {"day": 17, "title": "JS Class 14 - JavaScript DOM, Events", "description": "Combining DOM traversal with event-driven programming for dynamic pages.", "module": "JavaScript", "duration": "2h 00m", "date": "17 Jul 2026", "link": "https://drive.google.com/file/d/1hW55eLYVSRRClH3RvbJ3UFLMVLcGS9Du/view?usp=sharing"}, {"day": 18, "title": "JS Class 15 - JavaScript Event Listener", "description": "Working with addEventListener, event bubbling and delegation patterns.", "module": "JavaScript", "duration": "1h 48m", "date": "18 Jul 2026", "link": "https://drive.google.com/file/d/1aLPA5ylyPt7BJW9QRCDATJwi55XIO6Fq/view?usp=sharing"}, {"day": 19, "title": "JS Class 16 - JavaScript Object Fundamentals", "description": "Understanding objects, properties, methods and the `this` keyword.", "module": "JavaScript", "duration": "2h 05m", "date": "19 Jul 2026", "link": "https://drive.google.com/file/d/1lPSUCDFN0wr--VfE71Uk5KFCDGQhbOUj/view?usp=sharing"}, {"day": 20, "title": "JS Class 17 - Synchronous vs Asynchronous JS: Timer & Stopwatch", "description": "Exploring the JavaScript event loop through a hands-on timer and stopwatch build.", "module": "JavaScript", "duration": "2h 00m", "date": "20 Jul 2026", "link": "https://drive.google.com/file/d/1pcV5zJqx766itNpvAATOjRsLphKXFusq/view?usp=sharing"}, {"day": 21, "title": "JS Class 18 - JavaScript Callback", "description": "Understanding callback functions and how asynchronous behavior is achieved in JS.", "module": "JavaScript", "duration": "1h 55m", "date": "21 Jul 2026", "link": "https://drive.google.com/file/d/1eB7xBRW0E9kuJJ7kYGe6cIqidNDkT3EZ/view?usp=sharing"}, {"day": 22, "title": "JS Class 19 - Callback Hell and Promises: ATM Withdrawal Task", "description": "Solving callback hell using Promises through a practical ATM withdrawal simulation.", "module": "JavaScript", "duration": "2h 10m", "date": "22 Jul 2026", "link": "https://drive.google.com/file/d/1VarWJnAEAn5Lk14XLhhdmPQxjbnaKuK5/view?usp=sharing"}, {"day": 23, "title": "JS Class 20 - Async and Await, Exception Handling", "description": "Modern async/await syntax and robust error handling with try-catch.", "module": "JavaScript", "duration": "2h 05m", "date": "22 Jul 2026", "link": "https://drive.google.com/file/d/1H0WU3wToqsrxYKoIfVhibbGIvSQbg5Yt/view?usp=sharing"}];
+
+  async function loadRecordings(){
+    try{
+      const res = await fetch('recordings.json', {cache:"no-store"});
+      if(!res.ok) throw new Error('bad response');
+      recordings = await res.json();
+    }catch(e){
+      recordings = FALLBACK_RECORDINGS;
+    }
+  }
+
+  function hideLoader(){
+    setTimeout(()=> loader.classList.add('hidden'), 500);
+  }
+
+  // ---------- LOGIN ----------
+  function isLoggedIn(){
+    return localStorage.getItem(LS_LOGIN) === "true";
+  }
+
+  function showDashboard(){
+    loginScreen.style.display = "none";
+    dashboard.classList.add('active');
+    initDashboard();
+  }
+
+  function showLogin(){
+    dashboard.classList.remove('active');
+    loginScreen.style.display = "flex";
+  }
+
+  document.getElementById('access-btn').addEventListener('click', attemptLogin);
+  document.getElementById('access-code').addEventListener('keydown', e=>{
+    if(e.key === 'Enter') attemptLogin();
+  });
+
+  function attemptLogin(){
+    const val = document.getElementById('access-code').value.trim().toUpperCase();
+    const err = document.getElementById('error-msg');
+    if(val === ACCESS_CODE){
+      localStorage.setItem(LS_LOGIN, "true");
+      err.classList.remove('show','shake');
+      showDashboard();
+    }else{
+      err.classList.add('show');
+      err.classList.remove('shake');
+      void err.offsetWidth;
+      err.classList.add('shake');
+    }
+  }
+
+  document.getElementById('logout-btn').addEventListener('click', ()=>{
+    localStorage.removeItem(LS_LOGIN);
+    document.getElementById('access-code').value = "";
+    showLogin();
+  });
+
+  // ---------- RIPPLE EFFECT ----------
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.btn-primary, .logout-btn, .filter-chip');
+    if(!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+    btn.style.position = btn.style.position || 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(ripple);
+    setTimeout(()=>ripple.remove(), 650);
+  });
+
+  // ---------- DASHBOARD ----------
+  function getFavorites(){
+    try{ return JSON.parse(localStorage.getItem(LS_FAVS)) || []; }catch(e){ return []; }
+  }
+  function toggleFavorite(day){
+    let favs = getFavorites();
+    if(favs.includes(day)) favs = favs.filter(d=>d!==day);
+    else favs.push(day);
+    localStorage.setItem(LS_FAVS, JSON.stringify(favs));
+  }
+  function getWatched(){
+    try{ return JSON.parse(localStorage.getItem(LS_WATCHED)) || []; }catch(e){ return []; }
+  }
+  function markWatched(day){
+    let watched = getWatched();
+    if(!watched.includes(day)){ watched.push(day); localStorage.setItem(LS_WATCHED, JSON.stringify(watched)); }
+    localStorage.setItem(LS_CONTINUE, JSON.stringify({day, ts: Date.now()}));
+  }
+
+  function initDashboard(){
+    renderStats();
+    renderFilters();
+    renderContinue();
+    renderProgress();
+    renderCards();
+
+    document.getElementById('search-input').addEventListener('input', renderCards);
+  }
+
+  function renderStats(){
+    const totalDays = recordings.length;
+    const totalVideos = recordings.length;
+    const modules = new Set(recordings.map(r=>r.module));
+    const latest = recordings.reduce((a,b)=>{
+      return (new Date(a.date) > new Date(b.date)) ? a : b;
+    }, recordings[0] || {date:'-'});
+
+    document.getElementById('stat-days').textContent = totalDays;
+    document.getElementById('stat-videos').textContent = totalVideos;
+    document.getElementById('stat-modules').textContent = modules.size;
+    document.getElementById('stat-latest').textContent = latest ? latest.date : '-';
+  }
+
+  function renderFilters(){
+    const modules = ["All", ...new Set(recordings.map(r=>r.module))];
+    const row = document.getElementById('filter-row');
+    row.innerHTML = "";
+    modules.forEach(m=>{
+      const chip = document.createElement('button');
+      chip.className = 'filter-chip' + (m === activeFilter ? ' active' : '');
+      chip.textContent = m;
+      chip.addEventListener('click', ()=>{
+        activeFilter = m;
+        document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        renderCards();
+      });
+      row.appendChild(chip);
+    });
+  }
+
+  function renderContinue(){
+    const wrap = document.getElementById('continue-wrap');
+    const card = document.getElementById('continue-card');
+    let cont;
+    try{ cont = JSON.parse(localStorage.getItem(LS_CONTINUE)); }catch(e){ cont = null; }
+    if(!cont){ wrap.classList.remove('show'); return; }
+    const rec = recordings.find(r=>r.day === cont.day);
+    if(!rec){ wrap.classList.remove('show'); return; }
+    wrap.classList.add('show');
+    card.innerHTML = `
+      <div class="continue-info">
+        <b>Day ${String(rec.day).padStart(2,'0')} — ${rec.title}</b>
+        <div>${rec.module} · ${rec.duration}</div>
+      </div>
+      <a href="${rec.link}" target="_blank" rel="noopener" class="btn-primary watch-btn" style="width:auto; padding:11px 22px;" onclick="markDayWatched(${rec.day})">▶ Resume</a>
+    `;
+  }
+
+  window.markDayWatched = function(day){ markWatched(day); };
+
+  function renderProgress(){
+    const watched = getWatched().filter(d => recordings.some(r=>r.day===d));
+    const total = recordings.length;
+    const pct = total ? Math.round((watched.length/total)*100) : 0;
+    document.getElementById('progress-text').textContent = `${watched.length} / ${total} Recordings`;
+    setTimeout(()=>{ document.getElementById('progress-fill').style.width = pct + '%'; }, 150);
+  }
+
+  function renderCards(){
+    const grid = document.getElementById('cards-grid');
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const favs = getFavorites();
+
+    let filtered = recordings.filter(r=>{
+      const matchesFilter = activeFilter === "All" || r.module === activeFilter;
+      const haystack = `day ${r.day} ${r.title} ${r.description} ${r.module}`.toLowerCase();
+      const matchesQuery = !query || haystack.includes(query);
+      return matchesFilter && matchesQuery;
+    });
+
+    grid.innerHTML = "";
+
+    if(filtered.length === 0){
+      grid.innerHTML = `<div class="empty-state">No recordings match your search. Try a different keyword or filter.</div>`;
+      return;
+    }
+
+    filtered.forEach((r, idx)=>{
+      const isFav = favs.includes(r.day);
+      const el = document.createElement('div');
+      el.className = 'rec-card glass fade-up';
+      el.style.animationDelay = (idx * 0.04) + 's';
+      el.innerHTML = `
+        <div class="rec-card-top">
+          <span class="day-badge">Day ${String(r.day).padStart(2,'0')}</span>
+          <button class="fav-btn ${isFav ? 'active':''}" title="Save to favorites">❤</button>
+        </div>
+        <div class="rec-title">${r.title}</div>
+        <div class="rec-desc">${r.description}</div>
+        <div class="rec-meta">
+          <span class="module-tag">${r.module}</span>
+          <span>${r.date}</span>
+          <span>${r.duration}</span>
+        </div>
+        <a href="${r.link}" target="_blank" rel="noopener" class="btn-primary watch-btn">▶ Watch Recording</a>
+      `;
+      el.querySelector('.fav-btn').addEventListener('click', ()=>{
+        toggleFavorite(r.day);
+        el.querySelector('.fav-btn').classList.toggle('active');
+      });
+      el.querySelector('.watch-btn').addEventListener('click', ()=>{
+        markWatched(r.day);
+        setTimeout(()=>{ renderContinue(); renderProgress(); }, 50);
+      });
+      grid.appendChild(el);
+    });
+  }
+
+  // ---------- INIT ----------
+  (async function init(){
+    await loadRecordings();
+    hideLoader();
+    if(isLoggedIn()){
+      loginScreen.style.display = "none";
+      showDashboard();
+    }else{
+      dashboard.classList.remove('active');
+      loginScreen.style.display = "flex";
+    }
+  })();
+})();
+</script>
+</body>
+</html>

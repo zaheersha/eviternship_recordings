@@ -1,0 +1,209 @@
+[
+  {
+    "day": 1,
+    "title": "HTML & CSS Recap",
+    "description": "Refresher on core HTML tags and CSS fundamentals before diving into advanced layout techniques.",
+    "module": "HTML",
+    "duration": "2h 05m",
+    "date": "01 Jul 2026",
+    "link": "https://drive.google.com/file/d/1HE5KloF2o_LAHRlwrHxpFsBmc9ehCP_M/view?usp=sharing"
+  },
+  {
+    "day": 2,
+    "title": "CSS Grid Layout & Media Queries",
+    "description": "Building responsive layouts with CSS Grid and adapting designs across screen sizes with media queries.",
+    "module": "CSS",
+    "duration": "1h 55m",
+    "date": "02 Jul 2026",
+    "link": "https://drive.google.com/file/d/1ScUfae9FeT4-8m_VK4yzT78GdvT9resv/view?usp=sharing"
+  },
+  {
+    "day": 3,
+    "title": "CSS Animation & Transform",
+    "description": "Bringing interfaces to life with CSS transforms, keyframe animations and transitions.",
+    "module": "CSS",
+    "duration": "1h 48m",
+    "date": "03 Jul 2026",
+    "link": "https://drive.google.com/file/d/10mnBorzQY2YnKnshWthM16ZVfXY7F4T9/view?usp=sharing"
+  },
+  {
+    "day": 4,
+    "title": "JS Class 1 - Variables, Data Types & Tricky Console Programs",
+    "description": "Introduction to JavaScript variables, core data types, and console-based logic puzzles.",
+    "module": "JavaScript",
+    "duration": "2h 10m",
+    "date": "04 Jul 2026",
+    "link": "https://drive.google.com/file/d/11IZLwuefUEpUmymcCd9gp1-6VL4eryU7/view?usp=sharing"
+  },
+  {
+    "day": 5,
+    "title": "JS Class 2 - Data Types and Operators & Its Types",
+    "description": "Deep dive into JavaScript operators, type coercion and operator precedence.",
+    "module": "JavaScript",
+    "duration": "2h 00m",
+    "date": "05 Jul 2026",
+    "link": "https://drive.google.com/file/d/1F2aooSq7BsP1LFPTcCZkWcTm-koAKgUB/view?usp=sharing"
+  },
+  {
+    "day": 6,
+    "title": "JS Class 3 - Programming Logic and Conditional & Nested Statements",
+    "description": "Building decision-making logic using if-else chains and nested conditionals.",
+    "module": "JavaScript",
+    "duration": "2h 05m",
+    "date": "06 Jul 2026",
+    "link": "https://drive.google.com/file/d/1VJ9wqFwqhM7gz-z6gl35bwpUumCMVhbq/view?usp=sharing"
+  },
+  {
+    "day": 7,
+    "title": "JS Class 4 - Data Retrieval and Calculator Interface",
+    "description": "Hands-on project building a functional calculator interface using JavaScript logic.",
+    "module": "JavaScript",
+    "duration": "2h 15m",
+    "date": "07 Jul 2026",
+    "link": "https://drive.google.com/file/d/1T8TSw6QyH-cB3nDxPP4I1BCaISbz_6IO/view?usp=sharing"
+  },
+  {
+    "day": 8,
+    "title": "JS Class 5 - Programming Concepts: Loops",
+    "description": "Mastering for, while and do-while loops for repetitive logic and iteration.",
+    "module": "JavaScript",
+    "duration": "1h 50m",
+    "date": "08 Jul 2026",
+    "link": "https://drive.google.com/file/d/1UCNAPVM9GSnJBEZEX9DD5xOpyFjmDCxs/view?usp=sharing"
+  },
+  {
+    "day": 9,
+    "title": "JS Class 6 - Functions and JavaScript Arrays",
+    "description": "Understanding function declarations, expressions, and working with arrays.",
+    "module": "JavaScript",
+    "duration": "2h 00m",
+    "date": "09 Jul 2026",
+    "link": "https://drive.google.com/file/d/1KfuwbPLmFPfYDSorvapL5-A5MzDKY4Vr/view?usp=sharing"
+  },
+  {
+    "day": 10,
+    "title": "JS Class 7 - Array Manipulation Methods: TODO List",
+    "description": "Using push, pop, map, filter and more to build a working TODO list application.",
+    "module": "JavaScript",
+    "duration": "2h 20m",
+    "date": "10 Jul 2026",
+    "link": "https://drive.google.com/file/d/1aFlFXhTRMHG20UYeeRZSOH5pTdKZQqdN/view?usp=sharing"
+  },
+  {
+    "day": 11,
+    "title": "JS Class 8 - JavaScript String Manipulation Methods",
+    "description": "Exploring string methods for searching, slicing, and transforming text data.",
+    "module": "JavaScript",
+    "duration": "1h 45m",
+    "date": "11 Jul 2026",
+    "link": "https://drive.google.com/file/d/1yjZOOd-x66RoBwwbdFlA1fapGL9oX_zR/view?usp=sharing"
+  },
+  {
+    "day": 12,
+    "title": "JS Class 9 - String Transformation, Indexing, Validation & Extraction Logic",
+    "description": "Advanced string handling including validation patterns and data extraction logic.",
+    "module": "JavaScript",
+    "duration": "2h 05m",
+    "date": "12 Jul 2026",
+    "link": "https://drive.google.com/file/d/1WXPwn5sHu0-3uWSZqQYnKoUadklMczSn/view?usp=sharing"
+  },
+  {
+    "day": 13,
+    "title": "JS Class 10 - JavaScript Document Object Model Manipulation",
+    "description": "Introduction to the DOM tree and manipulating page elements with JavaScript.",
+    "module": "JavaScript",
+    "duration": "2h 10m",
+    "date": "13 Jul 2026",
+    "link": "https://drive.google.com/file/d/1GdPh6kXQtHllNysIj37IBVkIoMu-wjpS/view?usp=sharing"
+  },
+  {
+    "day": 14,
+    "title": "JS Class 11 - JavaScript Event Handlers 1",
+    "description": "Handling clicks, form submissions and basic user interaction events.",
+    "module": "JavaScript",
+    "duration": "1h 55m",
+    "date": "14 Jul 2026",
+    "link": "https://drive.google.com/file/d/1oMuht1H3nzi3Ne2k4_S-BNEaSiVk5i6X/view?usp=sharing"
+  },
+  {
+    "day": 15,
+    "title": "JS Class 12 - JavaScript Event Handlers 2",
+    "description": "Continuing event handling with keyboard, mouse and form events.",
+    "module": "JavaScript",
+    "duration": "1h 50m",
+    "date": "15 Jul 2026",
+    "link": "https://drive.google.com/file/d/1TtbUkkqA4FlDZMLqzptYFBJUPxynr1a1/view?usp=sharing"
+  },
+  {
+    "day": 16,
+    "title": "JS Class 13 - JavaScript Game Development",
+    "description": "Applying core JavaScript concepts to build a simple interactive browser game.",
+    "module": "JavaScript",
+    "duration": "2h 25m",
+    "date": "16 Jul 2026",
+    "link": "https://drive.google.com/file/d/1Y69Dk3OXfwgR4TKOdIuqKB9Z_pjwXSi5/view?usp=sharing"
+  },
+  {
+    "day": 17,
+    "title": "JS Class 14 - JavaScript DOM, Events",
+    "description": "Combining DOM traversal with event-driven programming for dynamic pages.",
+    "module": "JavaScript",
+    "duration": "2h 00m",
+    "date": "17 Jul 2026",
+    "link": "https://drive.google.com/file/d/1hW55eLYVSRRClH3RvbJ3UFLMVLcGS9Du/view?usp=sharing"
+  },
+  {
+    "day": 18,
+    "title": "JS Class 15 - JavaScript Event Listener",
+    "description": "Working with addEventListener, event bubbling and delegation patterns.",
+    "module": "JavaScript",
+    "duration": "1h 48m",
+    "date": "18 Jul 2026",
+    "link": "https://drive.google.com/file/d/1aLPA5ylyPt7BJW9QRCDATJwi55XIO6Fq/view?usp=sharing"
+  },
+  {
+    "day": 19,
+    "title": "JS Class 16 - JavaScript Object Fundamentals",
+    "description": "Understanding objects, properties, methods and the `this` keyword.",
+    "module": "JavaScript",
+    "duration": "2h 05m",
+    "date": "19 Jul 2026",
+    "link": "https://drive.google.com/file/d/1lPSUCDFN0wr--VfE71Uk5KFCDGQhbOUj/view?usp=sharing"
+  },
+  {
+    "day": 20,
+    "title": "JS Class 17 - Synchronous vs Asynchronous JS: Timer & Stopwatch",
+    "description": "Exploring the JavaScript event loop through a hands-on timer and stopwatch build.",
+    "module": "JavaScript",
+    "duration": "2h 00m",
+    "date": "20 Jul 2026",
+    "link": "https://drive.google.com/file/d/1pcV5zJqx766itNpvAATOjRsLphKXFusq/view?usp=sharing"
+  },
+  {
+    "day": 21,
+    "title": "JS Class 18 - JavaScript Callback",
+    "description": "Understanding callback functions and how asynchronous behavior is achieved in JS.",
+    "module": "JavaScript",
+    "duration": "1h 55m",
+    "date": "21 Jul 2026",
+    "link": "https://drive.google.com/file/d/1eB7xBRW0E9kuJJ7kYGe6cIqidNDkT3EZ/view?usp=sharing"
+  },
+  {
+    "day": 22,
+    "title": "JS Class 19 - Callback Hell and Promises: ATM Withdrawal Task",
+    "description": "Solving callback hell using Promises through a practical ATM withdrawal simulation.",
+    "module": "JavaScript",
+    "duration": "2h 10m",
+    "date": "22 Jul 2026",
+    "link": "https://drive.google.com/file/d/1VarWJnAEAn5Lk14XLhhdmPQxjbnaKuK5/view?usp=sharing"
+  },
+  {
+    "day": 23,
+    "title": "JS Class 20 - Async and Await, Exception Handling",
+    "description": "Modern async/await syntax and robust error handling with try-catch.",
+    "module": "JavaScript",
+    "duration": "2h 05m",
+    "date": "22 Jul 2026",
+    "link": "https://drive.google.com/file/d/1H0WU3wToqsrxYKoIfVhibbGIvSQbg5Yt/view?usp=sharing"
+  }
+]
