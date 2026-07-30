@@ -205,5 +205,41 @@
     "duration": "2h 05m",
     "date": "22 Jul 2026",
     "link": "https://drive.google.com/file/d/1H0WU3wToqsrxYKoIfVhibbGIvSQbg5Yt/view?usp=sharing"
-  }
+  },
+{
+  "day": 24,
+  "title": "JS Class 21 - JavaScript Object Notation",
+  "description": "Understanding JSON structure, parsing, stringifying, and working with JSON data in JavaScript.",
+  "module": "JavaScript",
+  "duration": "2h 05m",
+  "date": "23 Jul 2026",
+  "link": "https://drive.google.com/file/d/17Q_0ZOGsJSgsQn7LZkM3MRtUvhM0FRKW/view?usp=sharing"
+},
+{
+  "day": 25,
+  "title": "JS Class 22 - JavaScript API Architecture and Operations",
+  "description": "Learn API architecture, HTTP requests, API operations, and integrating external services in JavaScript.",
+  "module": "JavaScript",
+  "duration": "2h 05m",
+  "date": "24 Jul 2026",
+  "link": "https://drive.google.com/file/d/1N0rOQq_deOAsw7DOgG6161qQypY2Jybu/view?usp=sharing"
+},
+{
+  "day": 26,
+  "title": "JS Class 23 - JavaScript API Fundamentals, Testing, Implementation and Data Handling",
+  "description": "Explore API fundamentals, testing techniques, implementation strategies, and handling API response data.",
+  "module": "JavaScript",
+  "duration": "2h 05m",
+  "date": "25 Jul 2026",
+  "link": "https://drive.google.com/file/d/1l-wREIMPbqmpyL7rzXgNVJbZztzAEzEH/view?usp=sharing"
+},
+{
+  "day": 27,
+  "title": "JS Class 24 - JavaScript Database And Storage Local & Session",
+  "description": "Learn Local Storage and Session Storage, storing data in the browser, and managing client-side persistence.",
+  "module": "JavaScript",
+  "duration": "2h 05m",
+  "date": "26 Jul 2026",
+  "link": "https://drive.google.com/file/d/1v7iYD-a3YZ1YMZuJNShUNFmk1rPyZPma/view?usp=sharing"
+}
 ]
