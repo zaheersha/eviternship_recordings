@@ -241,5 +241,32 @@
   "duration": "2h 05m",
   "date": "26 Jul 2026",
   "link": "https://drive.google.com/file/d/1v7iYD-a3YZ1YMZuJNShUNFmk1rPyZPma/view?usp=sharing"
+},
+  {
+  "day": 28,
+  "title": "React Class 1 - Introduction to React",
+  "description": "Learn the basics of React, why React is used, its features, advantages, and the fundamentals of building user interfaces with React.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "27 Jul 2026",
+  "link": "https://drive.google.com/file/d/1Hqyih_Tqfzhg_njHyUb9HjJ3f60lmqAI/view?usp=sharing"
+},
+{
+  "day": 29,
+  "title": "React Class 2 - Setup and Installation",
+  "description": "Learn how to set up a React development environment, install Node.js and npm, create a React application using Vite, and run the first React project.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "28 Jul 2026",
+  "link": "https://drive.google.com/file/d/1pdOwSP0wJveA_Q1w_rwzAqdpQXgfxzKB/view?usp=sharing"
+},
+{
+  "day": 30,
+  "title": "React Class 3 - Components, JSX and First Components",
+  "description": "Learn React components, JSX syntax, functional components, component structure, and create the first React components with practical examples.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "29 Jul 2026",
+  "link": "https://drive.google.com/file/d/1R7DKMp4dFlKa9ftm2Pd04tdM3Ud5fiDo/view?usp=sharing"
 }
 ]
