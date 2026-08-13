@@ -268,5 +268,42 @@
   "duration": "2h 05m",
   "date": "29 Jul 2026",
   "link": "https://drive.google.com/file/d/1R7DKMp4dFlKa9ftm2Pd04tdM3Ud5fiDo/view?usp=sharing"
+},
+  ,
+{
+  "day": 31,
+  "title": "React Class 4 - Component Efficiency and Props",
+  "description": "Learn how to make React components reusable and efficient, understand component communication, and pass data between components using Props.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "30 Jul 2026",
+  "link": "https://drive.google.com/file/d/1VPlx_HcTr6tdVWvMjleOKFjeis9NIzVN/view?usp=sharing"
+},
+{
+  "day": 32,
+  "title": "React Class 5 - Props, Events and Counter Application",
+  "description": "Learn how to use Props with event handling in React and build a practical Counter Application using React event and component logic.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "31 Jul 2026",
+  "link": "https://drive.google.com/file/d/1Z5mDLkGTf2OSO5KaXxSKKcZs4kbYIHS1/view?usp=sharing"
+},
+{
+  "day": 33,
+  "title": "React Class 6 - State Management, Controlled Inputs and Forms",
+  "description": "Learn React state management, controlled input fields, handling form data, and creating interactive React Forms using state.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "1 Aug 2026",
+  "link": "https://drive.google.com/file/d/1F-sm0TGFfpobhWybkXYCuaXKYxp4jdq9/view?usp=sharing"
+},
+{
+  "day": 34,
+  "title": "React Class 7 - Functional, Class, Arrow and Normal Components",
+  "description": "Learn different ways of creating React components, including functional components, class components, arrow function components, and normal function components, along with React Conditional Rendering.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "2 Aug 2026",
+  "link": "https://drive.google.com/file/d/1z_6qqc8WQO9P9O-IKmsW1CGd4aZ7CRY3/view?usp=sharing"
 }
 ]
