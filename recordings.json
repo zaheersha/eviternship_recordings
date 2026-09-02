@@ -304,5 +304,32 @@
   "duration": "2h 05m",
   "date": "2 Aug 2026",
   "link": "https://drive.google.com/file/d/1z_6qqc8WQO9P9O-IKmsW1CGd4aZ7CRY3/view?usp=sharing"
+},
+  {
+  "day": 35,
+  "title": "React Class 8 - List Fundamentals, Data Mapping and Keys",
+  "description": "Learn how to work with lists in React, map data to components, perform list operations, and understand the importance of managing unique keys when rendering React lists.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "3 Aug 2026",
+  "link": "https://drive.google.com/file/d/19rGk8zN2khALmeyn6zAvT42-2K42qDII/view?usp=sharing"
+},
+{
+  "day": 36,
+  "title": "React Class 9 - Hooks and Component Lifecycle",
+  "description": "Learn React Hooks and component lifecycle concepts, including useState, useEffect, dependency arrays, cleanup functions, side effects, API calls, timers, event listeners, local storage, and the mount, update, and unmount lifecycle.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "4 Aug 2026",
+  "link": "https://drive.google.com/file/d/14q6UcLwzBaKWYvCWIDT_ZT7iBd5YNBmm/view?usp=sharing"
+},
+{
+  "day": 37,
+  "title": "React Class 10 - API Data Retrieval, useContext and useRef",
+  "description": "Learn how to retrieve and manage API data in React, share state between components using useContext, and directly access DOM elements and manage references using useRef.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "5 Aug 2026",
+  "link": "https://drive.google.com/file/d/1HXSDxlzeO4CTvotBPZsy8NOXbghvmlhy/view?usp=sharing"
 }
 ]
