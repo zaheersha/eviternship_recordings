@@ -331,5 +331,32 @@
   "duration": "2h 05m",
   "date": "5 Aug 2026",
   "link": "https://drive.google.com/file/d/1HXSDxlzeO4CTvotBPZsy8NOXbghvmlhy/view?usp=sharing"
+},
+  {
+  "day": 38,
+  "title": "React Bonus - Website Hosting with GitHub",
+  "description": "Learn GitHub platform capabilities and how to host a React website using GitHub, including the basic steps required to deploy and make a React application accessible online.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "6 Aug 2026",
+  "link": "https://drive.google.com/file/d/1fliHOYFlohgeP37KfNBJAybAU2J5EVNM/view?usp=sharing"
+},
+{
+  "day": 39,
+  "title": "React Class 11 - Fundamentals Recap and React Router Introduction",
+  "description": "Review the React fundamentals completed so far and get introduced to React Router for creating navigation and multiple pages or views in a React application.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "7 Aug 2026",
+  "link": "https://drive.google.com/file/d/1awRQh7YWNU6KmIY6u8n8-fXPUt7c13UQ/view?usp=sharing"
+},
+{
+  "day": 40,
+  "title": "React Class 12 - React Router Foundation, Navigation and Styling",
+  "description": "Learn the fundamentals of React Router and navigation between routes, along with styling React applications using CSS and Bootstrap.",
+  "module": "React",
+  "duration": "2h 05m",
+  "date": "8 Aug 2026",
+  "link": "https://drive.google.com/file/d/1CLTX9ZMXcjGWbS49INeZnftP36K7DH6t/view?usp=sharing"
 }
 ]
